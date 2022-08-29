@@ -29,7 +29,8 @@ import { filterImageFromURL, deleteLocalFiles } from "./util/util";
   /**************************************************************************** */
 
   app.get("/filteredimage", async (req: Request, res: Response) => {
-    const { image_url } = req.query;
+    const image_url: string = req.query.image_url;
+    let imagesArray: Array<string> = [];
 
     if (!image_url) {
       return res
@@ -37,14 +38,14 @@ import { filterImageFromURL, deleteLocalFiles } from "./util/util";
         .send({ auth: false, message: "Image URL is required" });
     }
 
+    // Filter the image and return its local path
     const filteredImage = await filterImageFromURL(image_url);
+    imagesArray.push(filteredImage);
 
-    res.status(200).sendFile(filteredImage);
-
-    // return res.status(200).send({
-    //   auth: true,
-    //   filteredImage,
-    // });
+    // Return the filtered file and delete the file afterwards
+    res.status(200).sendFile(filteredImage, function (err) {
+      deleteLocalFiles(imagesArray);
+    });
   });
 
   //! END @TODO1

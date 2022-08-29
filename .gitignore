@@ -35,3 +35,7 @@ UserInterfaceState.xcuserstate
 node_modules
 venv/
 .vscode
+
+# dont upload other non-important folders
+course-04
+course-02/exercises

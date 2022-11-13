@@ -3,9 +3,10 @@ import 'source-map-support/register'
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import * as middy from 'middy'
 import { cors, httpErrorHandler } from 'middy/middlewares'
+// import { getUserId } from '../utils'
+// import * as uuid from 'uuid'
 
 // import { createAttachmentPresignedUrl } from '../../businessLogic/todos'
-// import { getUserId } from '../utils'
 import { GenerateUploadUrl } from '../../businessLogic/todos'
 
 export const handler = middy(
